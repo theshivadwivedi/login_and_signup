@@ -10,12 +10,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 
-templates = Jinja2Templates(directory="frontend")
-
-
-app = FastAPI()
-from fastapi.staticfiles import StaticFiles
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 #middleware
 app.add_middleware(
@@ -35,12 +29,12 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html"
-    )
+@app.get("/")
+def home():
+    return {
+        "message": "FastAPI Backend Running"
+    }
+
 
 #post------------
 @app.post("/signup")
