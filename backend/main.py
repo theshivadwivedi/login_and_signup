@@ -6,18 +6,12 @@ import crud
 import schemas
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi import Request
 
-templates = Jinja2Templates(directory="frontend")
 
 
 app = FastAPI()
-from fastapi.staticfiles import StaticFiles
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-#middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -35,14 +29,13 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html"
-    )
+@app.get("/")
+def home():
+    return {
+        "message": "FastAPI Backend Running"
+    }
 
-#post------------
+
 @app.post("/signup")
 def signup(user: schemas.User_create, db: Session = Depends(get_db)):
 
@@ -61,7 +54,7 @@ def signup(user: schemas.User_create, db: Session = Depends(get_db)):
         "username": new_user.username,
         "email": new_user.email
     }
-## login --------
+
 @app.post("/login")
 def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
 
@@ -84,3 +77,4 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         "username": result.username,
         "email": result.email
     }
+
