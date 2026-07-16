@@ -40,6 +40,8 @@ def home(request: Request):
         request=request,
         name="index.html"
     )
+
+#post------------
 @app.post("/signup")
 def signup(user: schemas.User_create, db: Session = Depends(get_db)):
 
@@ -58,7 +60,7 @@ def signup(user: schemas.User_create, db: Session = Depends(get_db)):
         "username": new_user.username,
         "email": new_user.email
     }
-
+## login --------
 @app.post("/login")
 def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
 
