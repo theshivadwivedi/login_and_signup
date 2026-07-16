@@ -17,7 +17,6 @@ app = FastAPI()
 from fastapi.staticfiles import StaticFiles
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-#middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -42,7 +41,8 @@ def home(request: Request):
         name="index.html"
     )
 
-#post------------
+
+
 @app.post("/signup")
 def signup(user: schemas.User_create, db: Session = Depends(get_db)):
 
@@ -61,7 +61,7 @@ def signup(user: schemas.User_create, db: Session = Depends(get_db)):
         "username": new_user.username,
         "email": new_user.email
     }
-## login --------
+
 @app.post("/login")
 def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
 
