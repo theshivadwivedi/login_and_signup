@@ -17,6 +17,7 @@ app = FastAPI()
 from fastapi.staticfiles import StaticFiles
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
+#middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
