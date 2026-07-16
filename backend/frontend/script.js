@@ -1,4 +1,3 @@
-console.log("Script Loaded");
 function showLogin(){
 
     document.getElementById("loginForm").style.display="block";
