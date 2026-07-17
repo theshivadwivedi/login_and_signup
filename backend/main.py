@@ -13,7 +13,7 @@ from fastapi import Request
 app = FastAPI()
 
 origins = [
-    "https://login-and-signup-zeta.vercel.app/",
+    "https://login-and-signup-zeta.vercel.app",
 ]
 
 app.add_middleware(
