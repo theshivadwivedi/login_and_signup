@@ -1,32 +1,34 @@
+const API="https://login-and-signup-r77e.onrender.com";
+
 function showLogin(){
 
-    document.getElementById("loginForm").style.display="block";
+    loginForm.style.display="block";
+    signupForm.style.display="none";
 
-    document.getElementById("signupForm").style.display="none";
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
 
-    document.getElementById("message").innerText="";
+    message.innerText="";
 }
-
 
 function showSignup(){
 
-    document.getElementById("signupForm").style.display="block";
+    signupForm.style.display="block";
+    loginForm.style.display="none";
 
-    document.getElementById("loginForm").style.display="none";
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
 
-    document.getElementById("message").innerText="";
+    message.innerText="";
 }
-
 
 async function signup(){
 
-    const username=document.getElementById("username").value;
-
+    const username=username.value;
     const email=document.getElementById("email").value;
-
     const password=document.getElementById("password").value;
 
-    const response=await fetch("https://login-and-signup-r77e.onrender.com/signup",{
+    const response=await fetch(`${API}/signup`,{
 
         method:"POST",
 
@@ -35,47 +37,57 @@ async function signup(){
         },
 
         body:JSON.stringify({
-
-            username:username,
-            email:email,
-            password:password
-
+            username,
+            email,
+            password
         })
 
     });
 
     const data=await response.json();
 
-    document.getElementById("message").innerText=data.message || "Signup Successful";
+    message.style.color="#00ff9d";
+    message.innerText=data.message || "Signup Successful";
 
 }
 
+async function login(){
 
+    const email=document.getElementById("login_email").value;
 
-async function login() {
+    const password=document.getElementById("login_password").value;
 
-    const email = document.getElementById("login_email").value;
-    const password = document.getElementById("login_password").value;
+    const response=await fetch(`${API}/login`,{
 
-    const response = await fetch("https://login-and-signup-r77e.onrender.com/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
         },
-        body: JSON.stringify({
-            email: email,
-            password: password
+
+        body:JSON.stringify({
+            email,
+            password
         })
+
     });
 
-    const message = document.getElementById("message");
+    const data=await response.json();
 
-    if (response.ok) {
-        const data = await response.json();
-        message.style.color = "green";
-        message.innerText = data.message;
-    } else {
-        message.style.color = "red";
-        message.innerText = "Wrong email or password";
+    if(response.ok){
+
+        message.style.color="#00ff9d";
+
+        message.innerText=data.message;
+
     }
+
+    else{
+
+        message.style.color="#ff6b6b";
+
+        message.innerText="Wrong Email or Password";
+
+    }
+
 }
