@@ -1,45 +1,122 @@
-body{
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f0f2f5;
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:#111827;
+}
+
+.background{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,#4f46e5,#06b6d4,#9333ea);
+    background-size:300% 300%;
+    animation:gradient 8s infinite ease;
+}
+
+@keyframes gradient{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
 
 }
 
-.container{
+.card{
 
-    width:350px;
+    position:relative;
+    width:420px;
 
-    margin:80px auto;
+    padding:40px;
 
-    background:white;
+    background:rgba(255,255,255,.12);
 
-    padding:30px;
+    backdrop-filter:blur(20px);
 
-    border-radius:10px;
+    border-radius:25px;
 
-    box-shadow:0 0 10px gray;
+    color:white;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
 
 }
 
 h1{
 
     text-align:center;
+    margin-bottom:5px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+    opacity:.8;
+    margin-bottom:30px;
 
 }
 
 .tabs{
 
     display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:20px;
+    gap:10px;
+    margin-bottom:25px;
 
 }
 
 .tabs button{
 
-    width:48%;
+    flex:1;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#ffffff22;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.tabs button.active{
+
+    background:white;
+
+    color:#4f46e5;
+
+    font-weight:600;
+
+}
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:6px;
 
 }
 
@@ -47,30 +124,70 @@ input{
 
     width:100%;
 
-    padding:10px;
+    padding:14px;
 
-    margin:10px 0;
+    border:none;
 
-    box-sizing:border-box;
+    outline:none;
+
+    border-radius:12px;
+
+    margin-bottom:10px;
+
+    font-size:15px;
 
 }
 
-button{
+.main-btn{
 
     width:100%;
 
-    padding:10px;
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
 
     cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:linear-gradient(90deg,#4f46e5,#06b6d4);
+
+    transition:.3s;
+
+}
+
+.main-btn:hover{
+
+    transform:translateY(-2px);
 
 }
 
 #message{
 
-    margin-top:15px;
-
     text-align:center;
 
-    color:green;
+    margin-top:20px;
+
+    font-weight:600;
+
+}
+
+@media(max-width:500px){
+
+.card{
+
+width:90%;
+
+padding:30px 25px;
+
+}
 
 }
