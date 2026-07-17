@@ -1,93 +1,123 @@
-const API="https://login-and-signup-r77e.onrender.com";
+const API = "https://login-and-signup-r77e.onrender.com";
 
-function showLogin(){
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const loginTab = document.getElementById("loginTab");
+const signupTab = document.getElementById("signupTab");
+const message = document.getElementById("message");
 
-    loginForm.style.display="block";
-    signupForm.style.display="none";
+// Show Login Form
+function showLogin() {
+    loginForm.style.display = "block";
+    signupForm.style.display = "none";
 
     loginTab.classList.add("active");
     signupTab.classList.remove("active");
 
-    message.innerText="";
+    message.innerText = "";
 }
 
-function showSignup(){
-
-    signupForm.style.display="block";
-    loginForm.style.display="none";
+// Show Signup Form
+function showSignup() {
+    signupForm.style.display = "block";
+    loginForm.style.display = "none";
 
     signupTab.classList.add("active");
     loginTab.classList.remove("active");
 
-    message.innerText="";
+    message.innerText = "";
 }
 
-async function signup(){
+// Signup
+async function signup() {
 
-    const username=username.value;
-    const email=document.getElementById("email").value;
-    const password=document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-    const response=await fetch(`${API}/signup`,{
+    if (!username || !email || !password) {
+        message.style.color = "#ff6b6b";
+        message.innerText = "Please fill all fields.";
+        return;
+    }
 
-        method:"POST",
+    try {
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+        const response = await fetch(`${API}/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                email,
+                password
+            })
+        });
 
-        body:JSON.stringify({
-            username,
-            email,
-            password
-        })
+        const data = await response.json();
 
-    });
+        if (response.ok) {
+            message.style.color = "#00ff9d";
+            message.innerText = "Account created successfully!";
 
-    const data=await response.json();
+            document.getElementById("username").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
 
-    message.style.color="#00ff9d";
-    message.innerText=data.message || "Signup Successful";
+            setTimeout(showLogin, 1500);
 
+        } else {
+            message.style.color = "#ff6b6b";
+            message.innerText = data.detail || "Signup failed.";
+        }
+
+    } catch (error) {
+        message.style.color = "#ff6b6b";
+        message.innerText = "Cannot connect to server.";
+        console.error(error);
+    }
 }
 
-async function login(){
+// Login
+async function login() {
 
-    const email=document.getElementById("login_email").value;
+    const email = document.getElementById("login_email").value.trim();
+    const password = document.getElementById("login_password").value;
 
-    const password=document.getElementById("login_password").value;
-
-    const response=await fetch(`${API}/login`,{
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-            email,
-            password
-        })
-
-    });
-
-    const data=await response.json();
-
-    if(response.ok){
-
-        message.style.color="#00ff9d";
-
-        message.innerText=data.message;
-
+    if (!email || !password) {
+        message.style.color = "#ff6b6b";
+        message.innerText = "Please fill all fields.";
+        return;
     }
 
-    else{
+    try {
 
-        message.style.color="#ff6b6b";
+        const response = await fetch(`${API}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
 
-        message.innerText="Wrong Email or Password";
+        const data = await response.json();
 
+        if (response.ok) {
+            message.style.color = "#00ff9d";
+            message.innerText = `Welcome ${data.username}!`;
+
+        } else {
+            message.style.color = "#ff6b6b";
+            message.innerText = data.detail || "Wrong email or password.";
+        }
+
+    } catch (error) {
+        message.style.color = "#ff6b6b";
+        message.innerText = "Cannot connect to server.";
+        console.error(error);
     }
-
 }
