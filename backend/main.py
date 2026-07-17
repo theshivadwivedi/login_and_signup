@@ -13,7 +13,7 @@ from fastapi import Request
 app = FastAPI()
 
 origins = [
-    "https://login-and-signup-dnt7anvnt-theshivadwivedis-projects.vercel.app/",
+    "hhttps://login-and-signup-3jv37g2de-theshivadwivedis-projects.vercel.app/",
 ]
 
 app.add_middleware(
