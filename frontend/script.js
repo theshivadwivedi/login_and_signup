@@ -26,7 +26,7 @@ async function signup(){
 
     const password=document.getElementById("password").value;
 
-    const response=await fetch("http://127.0.0.1:8000/signup",{
+    const response=await fetch("https://login-and-signup-r77e.onrender.com/signup",{
 
         method:"POST",
 
@@ -57,7 +57,7 @@ async function login() {
     const email = document.getElementById("login_email").value;
     const password = document.getElementById("login_password").value;
 
-    const response = await fetch("http://127.0.0.1:8000/login", {
+    const response = await fetch("https://login-and-signup-r77e.onrender.com/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
