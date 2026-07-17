@@ -12,13 +12,11 @@ from fastapi import Request
 
 app = FastAPI()
 
-origins = [
-    "hhttps://login-and-signup-3jv37g2de-theshivadwivedis-projects.vercel.app/",
-]
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex=r"https://login-and-signup-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
