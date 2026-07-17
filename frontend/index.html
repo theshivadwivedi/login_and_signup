@@ -3,58 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication</title>
+    <title>Login & Signup</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+<div class="background"></div>
 
-    <h1>Authentication</h1>
+<div class="card">
+
+    <h1>🔐 Login System</h1>
+    <p class="subtitle">Secure Authentication Portal</p>
 
     <div class="tabs">
-        <button onclick="showLogin()">Login</button>
-        <button onclick="showSignup()">Signup</button>
+        <button id="loginTab" class="active" onclick="showLogin()">Login</button>
+        <button id="signupTab" onclick="showSignup()">Signup</button>
     </div>
 
-    <!-- LOGIN -->
+    <!-- Login -->
 
     <div id="loginForm">
 
-        <input type="email"
-               id="login_email"
-               placeholder="Email">
+        <label>Email</label>
+        <input
+            type="email"
+            id="login_email"
+            placeholder="Enter your email">
 
-        <input type="password"
-               id="login_password"
-               placeholder="Password">
+        <label>Password</label>
+        <input
+            type="password"
+            id="login_password"
+            placeholder="Enter password">
 
-        <button onclick="login()">
+        <button class="main-btn" onclick="login()">
             Login
         </button>
 
     </div>
 
-
-    <!-- SIGNUP -->
+    <!-- Signup -->
 
     <div id="signupForm" style="display:none;">
 
-        <input type="text"
-               id="username"
-               placeholder="Username">
+        <label>Username</label>
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
 
-        <input type="email"
-               id="email"
-               placeholder="Email">
+        <label>Email</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="Email">
 
-        <input type="password"
-               id="password"
-               placeholder="Password">
+        <label>Password</label>
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
 
-        <button onclick="signup()">
-            Signup
+        <button class="main-btn" onclick="signup()">
+            Create Account
         </button>
 
     </div>
@@ -63,6 +80,7 @@
 
 </div>
 
-<script src="/static/script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
